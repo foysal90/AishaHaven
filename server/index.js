@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const cors = require("cors");
+const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const port = process.env.PORT || 5000;
 
@@ -14,6 +15,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(morgan("dev"));
+
 
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const uri = `mongodb+srv://${process.env.DB_NAME}:${process.env.DB_PASS}@cluster0.7fhovkc.mongodb.net/?retryWrites=true&w=majority`;
@@ -31,6 +33,16 @@ async function run() {
     const usersCollection = client.db("AishaHavenDB").collection("users");
     const roomsCollection = client.db("AishaHavenDB").collection("rooms");
     const bookingsCollection = client.db("AishaHavenDB").collection("bookings");
+
+    app.post("/jwt", (req, res) => {
+      const user = req.body;
+      const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+        expiresIn: "1h",
+      });
+      console.log(token);
+
+      res.send({ token });
+    });
     // Save user email and role in DB
     app.put("/users/:email", async (req, res) => {
       const email = req.params.email;
