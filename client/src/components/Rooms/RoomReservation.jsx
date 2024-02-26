@@ -73,12 +73,12 @@ const RoomReservation = ({ roomData }) => {
       </div>
 
       <hr />
-      <div className='p-4'>
-        <Button
-          onClick={() => setIsOpen(true)}
-          disabled={roomData.host.email === user.email || roomData.booked}
-          label='Reserve'
-        />
+      <div className='p-4  '>
+       <button
+        className="w-full py-3 rounded-xl bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 ..."
+        onClick={() => setIsOpen(true)}
+        disabled={roomData.host.email === user.email || roomData.booked}
+       >Reserve</button>
       </div>
       <hr />
       <div className='p-4 flex flex-row items-center justify-between font-semibold text-lg'>
