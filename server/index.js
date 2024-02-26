@@ -41,7 +41,7 @@ async function run() {
         $set: user,
       };
       const result = await usersCollection.updateOne(query, updateDoc, options);
-      console.log(result);
+
       res.send(result);
     });
 
@@ -50,7 +50,7 @@ async function run() {
       const email = req.params.email;
       const query = { email: email };
       const result = await usersCollection.findOne(query);
-      console.log(result);
+
       res.send(result);
     });
 
@@ -74,7 +74,6 @@ async function run() {
       const query = { "host.email": email };
       const result = await roomsCollection.find(query).toArray();
 
-      console.log(result);
       res.send(result);
     });
 
@@ -83,14 +82,14 @@ async function run() {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const result = await roomsCollection.findOne(query);
-      console.log(result);
+
       res.send(result);
     });
 
     // Save a room in database
     app.post("/rooms", async (req, res) => {
       const room = req.body;
-      console.log(room);
+
       const result = await roomsCollection.insertOne(room);
       res.send(result);
     });
@@ -120,11 +119,22 @@ async function run() {
       const result = await bookingsCollection.find(query).toArray();
       res.send(result);
     });
+    // Get bookings for host
+    app.get("/bookings/host", async (req, res) => {
+      const email = req.query.email;
+
+      if (!email) {
+        res.send([]);
+      }
+      const query = { host: email };
+      const result = await bookingsCollection.find(query).toArray();
+      res.send(result);
+    });
 
     // Save a booking in database
     app.post("/bookings", async (req, res) => {
       const booking = req.body;
-      console.log(booking);
+
       const result = await bookingsCollection.insertOne(booking);
       res.send(result);
     });

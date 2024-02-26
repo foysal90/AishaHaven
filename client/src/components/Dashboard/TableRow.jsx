@@ -11,9 +11,9 @@ const TableRow = ({ booking, fetchBookings }) => {
   }
   const modalHandler = id => {
     deleteBooking(id).then(data => {
-      console.log(data)
+     
       updateStatus(booking.roomId, false).then(data => {
-        console.log(data)
+       
         fetchBookings()
         toast.success('Booking Canceled')
       })

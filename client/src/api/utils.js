@@ -26,7 +26,7 @@ export const imageUpload= async (image) => {
   const cloudinaryUrl = `https://api.cloudinary.com/v1_1/${
     import.meta.env.VITE_IMAGE_CLOUDINARY_NAME
   }/image/upload`;
-  console.log(cloudinaryUrl)
+ 
   const response = await fetch(cloudinaryUrl, {
     method: "POST",
     body: formData,

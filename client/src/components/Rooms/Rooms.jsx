@@ -5,11 +5,12 @@ import Loader from '../Shared/Loader'
 import { useSearchParams } from 'react-router-dom'
 import Heading from '../Heading/Heading'
 import { getAllRooms } from '../../api/rooms'
+import toast from 'react-hot-toast'
 
 const Rooms = () => {
   const [params, setParams] = useSearchParams()
   const category = params.get('category')
-  console.log(category)
+ 
   const [rooms, setRooms] = useState([])
   const [loading, setLoading] = useState(false)
   useEffect(() => {
@@ -17,10 +18,9 @@ const Rooms = () => {
     getAllRooms()
       .then(data => {
         if (category) {
-          console.log('hello')
+          
           const filtered = data.filter(room => room.category === category)
-          console.log(filtered)
-          console.log(data)
+      
           setRooms(filtered)
         } else {
           setRooms(data)
@@ -28,13 +28,13 @@ const Rooms = () => {
 
         setLoading(false)
       })
-      .catch(err => console.log(err))
+      .catch(err => toast.error(err.message))
   }, [category])
 
   if (loading) {
     return <Loader />
   }
-  console.log(rooms,'rooms')
+ 
   return (
     <Container>
       {rooms && rooms.length > 0 ? (

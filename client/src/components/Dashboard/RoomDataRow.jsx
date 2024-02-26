@@ -14,14 +14,14 @@ const RoomDataRow = ({ room, fetchRooms }) => {
     setIsOpen(false)
   }
   const modalHandler = id => {
-    console.log(id)
+  
     deleteRoom(id)
       .then(data => {
-        console.log(data)
+       
         fetchRooms()
         toast.success('Room deleted')
       })
-      .catch(err => console.log(err))
+      .catch(err => toast.error(err.message))
     closeModal()
   }
   return (

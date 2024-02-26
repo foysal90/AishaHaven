@@ -35,7 +35,7 @@ const AddRoom = () => {
     // Upload image
     imageUpload(image)
       .then(data => {
-        console.log(data)
+       
         const roomData = {
           location,
           title,
@@ -58,24 +58,24 @@ const AddRoom = () => {
         // post room data to server
         addRoom(roomData)
           .then(data => {
-            console.log(data)
+           
             setUploadButtonText('Uploaded!')
             setLoading(false)
             toast.success('Room Added!')
             navigate('/dashboard/my-listings')
           })
-          .catch(err => console.log(err))
+          .catch(err => toast.error(err.message))
 
         setLoading(false)
       })
       .catch(err => {
-        console.log(err.message)
+        toast.error(err.message)
         setLoading(false)
       })
   }
 
   const handleImageChange = image => {
-    console.log(image)
+ 
     setUploadButtonText(image.name)
   }
 

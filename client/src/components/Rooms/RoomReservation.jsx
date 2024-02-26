@@ -48,10 +48,10 @@ const RoomReservation = ({ roomData }) => {
   const modalHandler = () => {
     addBooking(bookingInfo)
       .then(data => {
-        console.log(data)
+      
         updateStatus(roomData._id, true)
           .then(data => {
-            console.log(data)
+          
             toast.success('Booking Successful!')
             navigate('/dashboard/my-bookings')
             closeModal()

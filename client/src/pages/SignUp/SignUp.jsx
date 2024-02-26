@@ -45,7 +45,7 @@ const SignUp = () => {
       .then((res) => res.json())
       .then((imageData) => {
         const imageUrl = imageData.secure_url;
-        console.log(imageUrl);
+       
 
     // const image = event.target.image.files[0]
     // const formData = new FormData()
@@ -72,19 +72,19 @@ const SignUp = () => {
               })
               .catch(err => {
                 setLoading(false)
-                console.log(err.message)
+               
                 toast.error(err.message)
               })
           })
           .catch(err => {
             setLoading(false)
-            console.log(err.message)
+         
             toast.error(err.message)
           })
       })
       .catch(err => {
         setLoading(false)
-        console.log(err.message)
+       
         toast.error(err.message)
       })
 
@@ -95,14 +95,14 @@ const SignUp = () => {
   const handleGoogleSignIn = () => {
     signInWithGoogle()
       .then(result => {
-        console.log(result.user)
+      
         // save user to db
         saveUser(result.user)
         navigate(from, { replace: true })
       })
       .catch(err => {
         setLoading(false)
-        console.log(err.message)
+       
         toast.error(err.message)
       })
   }

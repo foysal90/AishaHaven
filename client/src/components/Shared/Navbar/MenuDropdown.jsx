@@ -11,10 +11,10 @@ const MenuDropdown = () => {
   const { user, logOut, role, setRole } = useContext(AuthContext)
   const [isOpen, setIsOpen] = useState(false)
   const [modal, setModal] = useState(false)
-  console.log(role)
+
   const modalHandler = email => {
     becomeHost(email).then(data => {
-      console.log(data)
+     
       toast.success('You are host now, Post Rooms!')
       setRole('host')
       closeModal()
