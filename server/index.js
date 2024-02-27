@@ -28,7 +28,7 @@ const verifyJWT = (req, res, next) => {
   }
   // bearer token
   const token = authorization.split(" ")[1];
-  console.log(token)
+  console.log(token);
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
     if (err) {
       return res
@@ -39,7 +39,6 @@ const verifyJWT = (req, res, next) => {
     next();
   });
 };
-
 
 const uri = `mongodb+srv://${process.env.DB_NAME}:${process.env.DB_PASS}@cluster0.7fhovkc.mongodb.net/?retryWrites=true&w=majority`;
 
@@ -105,9 +104,9 @@ async function run() {
     // Get all rooms for host
     app.get("/rooms/:email", verifyJWT, async (req, res) => {
       const decodedEmail = req.decoded.email;
-      console.log(decodedEmail,'decoded')
-      const email = req.params.email
-      console.log(email, 'email')
+      console.log(decodedEmail, "decoded");
+      const email = req.params.email;
+      console.log(email, "email");
       if (email !== decodedEmail) {
         return res
           .status(403)
