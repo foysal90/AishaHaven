@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { ImSpinner9 } from "react-icons/im";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { updateStatus } from "../../api/bookings";
-import "./CheckoutForm.css";
+import './CheckOutForm.css'
 
 const CheckOutForms = ({ bookingInfo, closeModal }) => {
   const navigate = useNavigate();
