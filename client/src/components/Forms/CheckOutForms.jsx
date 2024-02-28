@@ -130,12 +130,13 @@ const CheckOutForms = ({ bookingInfo, closeModal }) => {
           <button
             type="submit"
             disabled={!stripe || !clientSecret || processing}
-            className="inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
+            className="inline-flex justify-center rounded-md border border-transparent
+             bg-green-600 px-4 py-2 text-sm font-medium text-green-100 hover:bg-green-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
           >
             {processing ? (
               <ImSpinner9 className="m-auto animate-spin" size={24} />
             ) : (
-              `Pay ${bookingInfo.price}$`
+              `Pay $ ${bookingInfo.price}`
             )}
           </button>
         </div>

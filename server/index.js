@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 require("dotenv").config();
 const stripe = require("stripe")(process.env.PAYMENT_SECRET_KEY);
+const nodemailer = require("nodemailer");
 const port = process.env.PORT || 5000;
 
 // middleware
@@ -38,6 +39,42 @@ const verifyJWT = (req, res, next) => {
     }
     req.decoded = decoded;
     next();
+  });
+};
+
+//email setup
+
+const sendMail = (emailData, emailAddress) => {
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL,
+      pass: process.env.PASSWORD,
+    },
+  });
+
+  // verify connection configuration
+  transporter.verify(function (error, success) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Server is ready to take our messages");
+    }
+  });
+
+  const mailOptions = {
+    from: process.env.EMAIL,
+    to: emailAddress,
+    subject: emailData?.subject,
+    html: `<h2>${emailData?.message}</h2>`,
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
   });
 };
 
@@ -195,6 +232,27 @@ async function run() {
       const booking = req.body;
 
       const result = await bookingsCollection.insertOne(booking);
+
+      if (result.insertedId) {
+        // Send confirmation email to guest
+        sendMail(
+          {
+            subject: "Booking Successful!",
+            message: `Booking Id: ${result?.insertedId}, TransactionId: ${booking.transactionId}`,
+          },
+          booking?.guest?.email
+        );
+        // Send confirmation email to host
+        sendMail(
+          {
+            subject: `${booking?.title} got booked`,
+            message: `Booking Id: ${result?.insertedId},
+             TransactionId: ${booking.transactionId}. 
+             Please Check dashboard for more info`,
+          },
+          booking?.host
+        );
+      }
       res.send(result);
     });
 
