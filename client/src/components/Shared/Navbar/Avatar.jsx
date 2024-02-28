@@ -11,7 +11,7 @@ const Avatar = () => {
       src={user && user.photoURL ? user.photoURL : avatarImg}
       alt="profile"
       height="30"
-      width="30"
+      width="50"
     />
   );
 };

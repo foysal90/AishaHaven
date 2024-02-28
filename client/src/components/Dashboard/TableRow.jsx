@@ -34,12 +34,12 @@ const TableRow = ({ booking, fetchBookings }) => {
             </div>
           </div>
           <div className='ml-3'>
-            <p className='text-gray-900 whitespace-no-wrap'>{booking?.title}</p>
+            <p className='text-gray-900 w-36 whitespace-no-wrap'>{booking?.title}</p>
           </div>
         </div>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <p className='text-gray-900 whitespace-no-wrap'>{booking?.location}</p>
+        <p className='text-gray-900 w-32 whitespace-no-wrap'>{booking?.location}</p>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
         <p className='text-gray-900 whitespace-no-wrap'>${booking?.price}</p>
