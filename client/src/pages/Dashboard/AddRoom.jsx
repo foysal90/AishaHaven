@@ -61,7 +61,7 @@ const AddRoom = () => {
            
             setUploadButtonText('Uploaded!')
             setLoading(false)
-            toast.success('Room Added!')
+            toast.success('Room has been Added!')
             navigate('/dashboard/my-listings')
           })
           .catch(err => toast.error(err.message))
